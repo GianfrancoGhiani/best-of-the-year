@@ -10,6 +10,6 @@
 <body>
     <h1 th:text="${mediaTitle}"></h1>
     <h2 th:text="${movieDirector} ? 'Movie Director: ' + ${movieDirector} : 'Artist: '+${songArtist} "></h2>
-    <h3 th:text="${movieDirector} ? 'Duration: '+ ${movieDuration} : ''"></h3>
+    <h3 th:if="${movieDirector}" th:text="'Duration: '+ ${movieDuration}"></h3>
 </body>
 </html>

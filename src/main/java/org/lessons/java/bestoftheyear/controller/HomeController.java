@@ -5,6 +5,7 @@ import org.lessons.java.bestoftheyear.model.Song;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -30,10 +31,10 @@ public class HomeController {
     private List<Song> getBestSongs(){
         List<Song> songList = new ArrayList<>();
         songList.add(new Song(1,"Cenere"));
-        songList.add(new Song(1,"Made in Italy"));
-        songList.add(new Song(1,"Due Vite"));
-        songList.add(new Song(1,"La guerra di Piero"));
-        songList.add(new Song(1,"Bocca di Rosa"));
+        songList.add(new Song(2,"Made in Italy"));
+        songList.add(new Song(3,"Due Vite"));
+        songList.add(new Song(4,"La guerra di Piero"));
+        songList.add(new Song(5,"Bocca di Rosa"));
         return  songList;
     }
 
@@ -57,5 +58,28 @@ public class HomeController {
         songString = songString.substring(0, songString.length() - 2);
         model.addAttribute("songs",songString);
         return "songs";
+    }
+
+    @GetMapping("/movies/{id}")
+    public String getMovie(@PathVariable("id") int id, Model model){
+        for (Movie m: getBestMovies()) {
+            if (m.getId() == id){
+                model.addAttribute("mediaId", m.getId());
+                model.addAttribute("mediaTitle", m.getTitle());
+            }
+        }
+
+        return "singleMedia";
+    }
+    @GetMapping("/songs/{id}")
+    public String getSong(@PathVariable("id") int id, Model model){
+        for (Song s: getBestSongs()) {
+            if (s.getId() == id){
+                model.addAttribute("mediaId", s.getId());
+                model.addAttribute("mediaTitle", s.getTitle());
+            }
+        }
+
+        return "singleMedia";
     }
 }

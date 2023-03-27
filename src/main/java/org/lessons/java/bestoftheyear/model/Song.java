@@ -1,9 +1,23 @@
 package org.lessons.java.bestoftheyear.model;
 
 public class Song extends Media{
-    public Song(int id, String title) throws IllegalArgumentException {
+    private String artist;
+
+    public Song(int id, String title, String artist) throws IllegalArgumentException {
         super(id, title);
+        if (artist.isBlank()) throw new IllegalArgumentException("The artist must be specified");
+        this.artist = artist;
     }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        if (artist.isBlank()) throw new IllegalArgumentException("The artist must be specified");
+        this.artist = artist;
+    }
+
 
     @Override
     public int getId() {
@@ -27,6 +41,6 @@ public class Song extends Media{
 
     @Override
     public String toString() {
-        return  super.toString();
+        return  "artist: "+ artist + ", "+ super.toString();
     }
 }

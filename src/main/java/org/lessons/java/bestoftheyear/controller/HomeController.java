@@ -22,19 +22,19 @@ public class HomeController {
 
     private List<Movie> getBestMovies(){
         List<Movie> movieList = new ArrayList<>();
-        movieList.add(new Movie(1,"Interstellar"));
-        movieList.add(new Movie(2,"Memento"));
-        movieList.add(new Movie(3,"Inception"));
-        movieList.add(new Movie(4,"Batman Returns"));
+        movieList.add(new Movie(1,"Interstellar",147, "Nolan"));
+        movieList.add(new Movie(2,"Memento",123, "Nolan"));
+        movieList.add(new Movie(3,"Inception",169, "Nolan"));
+        movieList.add(new Movie(4,"Batman Returns",133, "Tim Burton"));
         return movieList;
     }
     private List<Song> getBestSongs(){
         List<Song> songList = new ArrayList<>();
-        songList.add(new Song(1,"Cenere"));
-        songList.add(new Song(2,"Made in Italy"));
-        songList.add(new Song(3,"Due Vite"));
-        songList.add(new Song(4,"La guerra di Piero"));
-        songList.add(new Song(5,"Bocca di Rosa"));
+        songList.add(new Song(1,"Cenere", "Lazza"));
+        songList.add(new Song(2,"Made in Italy", "Rosa Chemical"));
+        songList.add(new Song(3,"Due Vite", "Cesare Cremonini"));
+        songList.add(new Song(4,"La guerra di Piero", "De Andrè"));
+        songList.add(new Song(5,"Bocca di Rosa", "De Andrè"));
         return  songList;
     }
 
@@ -66,6 +66,8 @@ public class HomeController {
             if (m.getId() == id){
                 model.addAttribute("mediaId", m.getId());
                 model.addAttribute("mediaTitle", m.getTitle());
+                model.addAttribute("movieDirector", m.getDirector());
+                model.addAttribute("movieDuration", m.getMinDuration());
             }
         }
 
@@ -77,6 +79,7 @@ public class HomeController {
             if (s.getId() == id){
                 model.addAttribute("mediaId", s.getId());
                 model.addAttribute("mediaTitle", s.getTitle());
+                model.addAttribute("songArtist", s.getArtist());
             }
         }
 

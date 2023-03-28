@@ -1,0 +1,35 @@
+.container-md{
+    padding: 0 0 6rem 0;
+border:1px solid black;
+}
+.container-md.single .content{
+    padding: 3rem;
+}
+.navbar{
+    border-bottom:1px solid black
+}
+.nav-link{
+    border: 1px solid black;
+}
+.nav-link.my-active, .nav-link:hover {
+    border: 1px solid #8ba7ce;
+    background-color: #dae8fc;
+}
+.mid-container img{
+    max-width: 100%;
+}
+.mid-container p {
+    width:100%;
+    padding: 10rem;
+    border: 1px solid black;
+}
+.lists li{
+    list-style: none;
+    padding:2rem;
+    border:1px solid black;
+}
+li a {
+    text-decoration:none;
+    color: black;
+    font-weight: 700;
+}

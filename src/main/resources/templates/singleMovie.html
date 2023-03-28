@@ -5,11 +5,20 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <div th:replace="fragments :: headResources"></div>
+
     <title th:text="${movie.getTitle()}"></title>
 </head>
 <body>
-    <h1 th:text="${movie.getTitle()}"></h1>
-    <h2 th:text="|Movie Director: ${movie.getDirector()}|"></h2>
-    <h3 th:text="|Duration: ${movie.getMinDuration()}|"></h3>
+<div class="container-md single">
+    <div th:replace="~{fragments :: nav(movies)}"></div>
+    <div class="content">
+        <h1 th:text="${movie.getTitle()}"></h1>
+        <h2 th:text="|Movie Director: ${movie.getDirector()}|"></h2>
+        <h3 th:text="|Duration: ${movie.getMinDuration()}|"></h3>
+
+    </div>
+
+</div>
 </body>
 </html>

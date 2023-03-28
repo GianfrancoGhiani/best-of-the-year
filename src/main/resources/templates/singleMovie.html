@@ -5,18 +5,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Songs</title>
+    <title th:text="${movie.getTitle()}"></title>
 </head>
 <body>
-<h1>Best Songs</h1>
-<ul>
-    <li th:each="song : ${songs}">
-        <a th:href="@{|/songs/${song.getId()}|}"
-           th:text="|${song.getTitle()} - ${song.getArtist()}|"></a>
-    </li>
-</ul>
-
-<p th:if="${message}" th:text="${message}"></p>
-
+    <h1 th:text="${movie.getTitle()}"></h1>
+    <h2 th:text="|Movie Director: ${movie.getDirector()}|"></h2>
+    <h3 th:text="|Duration: ${movie.getMinDuration()}|"></h3>
 </body>
 </html>

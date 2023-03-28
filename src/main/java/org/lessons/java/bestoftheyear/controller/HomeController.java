@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -41,55 +42,39 @@ public class HomeController {
 
     @GetMapping("/movies")
     public String getMovieList(Model model){
-        String movieString = "";
-        for (Movie m: getBestMovies()) {
-            movieString += m.toString() + " / ";
-        }
-        movieString = movieString.substring(0,movieString.length() - 2);
-        model.addAttribute("movies",movieString);
+        model.addAttribute("movies",getBestMovies());
         return "movies";
     }
     @GetMapping("/songs")
     public String getSongList(Model model){
-        String songString = "";
-        for (Song s: getBestSongs()) {
-            songString += s.toString() + " / ";
-
-        }
-        songString = songString.substring(0, songString.length() - 2);
-        model.addAttribute("songs",songString);
+        model.addAttribute("songs",getBestSongs());
         return "songs";
     }
 
     @GetMapping("/movies/{id}")
     public String getMovie(@PathVariable("id") int id, Model model, RedirectAttributes redirectAttributes){
-        for (Movie m: getBestMovies()) {
-            if (m.getId() == id){
-                model.addAttribute("mediaId", m.getId());
-                model.addAttribute("mediaTitle", m.getTitle());
-                model.addAttribute("movieDirector", m.getDirector());
-                model.addAttribute("movieDuration", m.getMinDuration());
-            } else{
+        Movie singleMovie = getBestMovies().stream().filter((movie -> movie.getId() == id)).findFirst().orElse(null);
+        if (singleMovie != null){
+                model.addAttribute("movie", singleMovie);
+        } else{
                 redirectAttributes.addFlashAttribute("message", "You was serching for a not listed movie pls retry");
                 return "redirect:/movies";
-            }
         }
 
-        return "singleMedia";
+
+        return "singleMovie";
     }
     @GetMapping("/songs/{id}")
     public String getSong(@PathVariable("id") int id, Model model, RedirectAttributes redirectAttributes){
-        for (Song s: getBestSongs()) {
-            if (s.getId() == id){
-                model.addAttribute("mediaId", s.getId());
-                model.addAttribute("mediaTitle", s.getTitle());
-                model.addAttribute("songArtist", s.getArtist());
-            } else{
+        Song singleSong = getBestSongs().stream().filter((song -> song.getId() == id)).findFirst().orElse(null);
+        if (singleSong != null){
+                model.addAttribute("song", singleSong);
+        } else{
                 redirectAttributes.addFlashAttribute("message", "You was serching for a not listed song pls retry");
                 return "redirect:/songs";
-            }
         }
 
-        return "singleMedia";
+
+        return "singleSong";
     }
 }
